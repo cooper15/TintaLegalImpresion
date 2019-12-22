@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TintalegalImpresion", "protoprint\TintalegalImpresion.vbproj", "{F3376082-BEF3-4B6C-B759-EC81D2BF2BB0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstaladorTintaLegal", "InstaladorTintaLegal\InstaladorTintaLegal.vdproj", "{C94025B5-37D0-4170-A2ED-E6FED24F9922}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3376082-BEF3-4B6C-B759-EC81D2BF2BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3376082-BEF3-4B6C-B759-EC81D2BF2BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3376082-BEF3-4B6C-B759-EC81D2BF2BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3376082-BEF3-4B6C-B759-EC81D2BF2BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94025B5-37D0-4170-A2ED-E6FED24F9922}.Debug|Any CPU.ActiveCfg = Debug
+		{C94025B5-37D0-4170-A2ED-E6FED24F9922}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A242CD33-415F-40F3-9CAE-1770E23A8CC9}
+	EndGlobalSection
+EndGlobal
