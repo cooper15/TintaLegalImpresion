@@ -11,14 +11,12 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
-    optionSelected()
+    optionSelected();
     document.getElementById("run").onclick = runWord;
   }
 });
 
-
 export async function optionSelected() {
-
   const pageSelect = document.getElementById("pagina") as HTMLSelectElement;
 
   pageSelect.addEventListener("change", () => {
@@ -26,7 +24,6 @@ export async function optionSelected() {
     if (selectedValue === "Frente") {
       //FIXME we have to remove this duplicated code
       return Word.run(async (context) => {
-
         // insert a paragraph at the end of the document.
         const document = context.document;
 
@@ -36,27 +33,26 @@ export async function optionSelected() {
         document.pageSetup.topMargin = pageMarginsConfig.front.topMargin;
         document.pageSetup.bottomMargin = pageMarginsConfig.front.bottomMargin;
 
-        document.paragraphs.items.forEach(paragraph => {
-          paragraph.leftIndent = pageMarginsConfig.front.leftIndent;
-          paragraph.rightIndent = pageMarginsConfig.front.rightIndent;
+        document.paragraphs.getFirst().leftIndent = pageMarginsConfig.front.leftIndent;
+        document.paragraphs.getFirst().rightIndent = pageMarginsConfig.front.rightIndent;
 
-          paragraph.spaceBefore = 0;
-          paragraph.spaceAfter = 0;
-          paragraph.lineSpacing = 24.3;
-          paragraph.alignment = Word.Alignment.justified;
-        });
+        document.paragraphs.getFirst().spaceBefore = 0;
+        document.paragraphs.getFirst().spaceAfter = 0;
+        document.paragraphs.getFirst().lineSpacing = 24.3;
+        document.paragraphs.getFirst().alignment = Word.Alignment.justified;
 
-        document.paragraphs.getFirst().font.name = "Calibri"
+        document.paragraphs.getFirst().font.name = "Calibri";
         document.paragraphs.getFirst().font.size = 10;
 
         await context.sync();
       });
-    }
-    else if (selectedValue === "Vuelto") {
+    } else if (selectedValue === "Vuelto") {
       return Word.run(async (context) => {
-
         // insert a paragraph at the end of the document.
-        const paragraph = context.document.body.insertParagraph("Seleccionaste pagina vuelto", Word.InsertLocation.end);
+        const paragraph = context.document.body.insertParagraph(
+          "Seleccionaste pagina vuelto",
+          Word.InsertLocation.end
+        );
 
         // change the paragraph color to blue.
         paragraph.font.color = "blue";
@@ -66,7 +62,6 @@ export async function optionSelected() {
     }
   });
 }
-
 
 export async function runWord() {
   return Word.run(async (context) => {
