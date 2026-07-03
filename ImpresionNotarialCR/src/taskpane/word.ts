@@ -35,9 +35,19 @@ export async function optionSelected() {
         document.pageSetup.rightMargin = pageMarginsConfig.front.rightMargin;
         document.pageSetup.topMargin = pageMarginsConfig.front.topMargin;
         document.pageSetup.bottomMargin = pageMarginsConfig.front.bottomMargin;
-        document.paragraphs.getFirst().leftIndent = pageMarginsConfig.front.leftIndent;
-        document.paragraphs.getFirst().rightIndent = pageMarginsConfig.front.rightIndent;
 
+        document.paragraphs.items.forEach(paragraph => {
+          paragraph.leftIndent = pageMarginsConfig.front.leftIndent;
+          paragraph.rightIndent = pageMarginsConfig.front.rightIndent;
+
+          paragraph.spaceBefore = 0;
+          paragraph.spaceAfter = 0;
+          paragraph.lineSpacing = 24.3;
+          paragraph.alignment = Word.Alignment.justified;
+        });
+
+        document.paragraphs.getFirst().font.name = "Calibri"
+        document.paragraphs.getFirst().font.size = 10;
 
         await context.sync();
       });
