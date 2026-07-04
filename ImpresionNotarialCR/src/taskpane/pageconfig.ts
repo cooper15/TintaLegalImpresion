@@ -18,11 +18,11 @@ export const pageMarginsConfig: Record<string, MargingLayout> = {
     },
 
     back: {
-        leftIndent: 0.07,
-        rightIndent: -0.07,
-        topMargin: 1.77,
-        bottomMargin: 1.97,
-        leftMargin: 0.83,
-        rightMargin: 1.22
+        leftIndent: 5.04,
+        rightIndent: -5.04,
+        topMargin: 127.44,
+        bottomMargin: 141.84,
+        leftMargin: 59.43,
+        rightMargin: 87.84
     }
 }

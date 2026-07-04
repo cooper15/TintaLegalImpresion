@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-import { pageMarginsConfig } from "./pageconfig";
+import { MargingLayout, pageMarginsConfig } from "./pageconfig";
 
 /* global document, Office, Word */
 
@@ -12,7 +12,7 @@ Office.onReady((info) => {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     optionSelected();
-    document.getElementById("run").onclick = runWord;
+    showLineNumber();
   }
 });
 
@@ -22,59 +22,54 @@ export async function optionSelected() {
   pageSelect.addEventListener("change", () => {
     const selectedValue = pageSelect.value;
     if (selectedValue === "Frente") {
-      //FIXME we have to remove this duplicated code
       return Word.run(async (context) => {
-        // insert a paragraph at the end of the document.
         const document = context.document;
-
-        document.pageSetup.paperSize = Word.PaperSize.legal;
-        document.pageSetup.leftMargin = pageMarginsConfig.front.leftMargin;
-        document.pageSetup.rightMargin = pageMarginsConfig.front.rightMargin;
-        document.pageSetup.topMargin = pageMarginsConfig.front.topMargin;
-        document.pageSetup.bottomMargin = pageMarginsConfig.front.bottomMargin;
-
-        document.paragraphs.getFirst().leftIndent = pageMarginsConfig.front.leftIndent;
-        document.paragraphs.getFirst().rightIndent = pageMarginsConfig.front.rightIndent;
-
-        document.paragraphs.getFirst().spaceBefore = 0;
-        document.paragraphs.getFirst().spaceAfter = 0;
-        document.paragraphs.getFirst().lineSpacing = 24.3;
-        document.paragraphs.getFirst().alignment = Word.Alignment.justified;
-
-        document.paragraphs.getFirst().font.name = "Calibri";
-        document.paragraphs.getFirst().font.size = 10;
-
+        pageConfiguration(document, pageMarginsConfig.front);
+        generalParagraphConfiguration(document);
         await context.sync();
       });
     } else if (selectedValue === "Vuelto") {
       return Word.run(async (context) => {
-        // insert a paragraph at the end of the document.
-        const paragraph = context.document.body.insertParagraph(
-          "Seleccionaste pagina vuelto",
-          Word.InsertLocation.end
-        );
-
-        // change the paragraph color to blue.
-        paragraph.font.color = "blue";
-
+        const document = context.document;
+        pageConfiguration(document, pageMarginsConfig.back);
+        generalParagraphConfiguration(document);
         await context.sync();
       });
     }
   });
+
+  function pageConfiguration(document: Word.Document, page: MargingLayout) {
+    document.pageSetup.paperSize = Word.PaperSize.legal;
+    document.pageSetup.leftMargin = page.leftMargin;
+    document.pageSetup.rightMargin = page.rightMargin;
+    document.pageSetup.topMargin = page.topMargin;
+    document.pageSetup.bottomMargin = page.bottomMargin;
+    document.paragraphs.getFirst().leftIndent = page.leftIndent;
+    document.paragraphs.getFirst().rightIndent = page.rightIndent;
+  }
+
+  function generalParagraphConfiguration(document: Word.Document) {
+    document.paragraphs.getFirst().spaceBefore = 0;
+    document.paragraphs.getFirst().spaceAfter = 0;
+    document.paragraphs.getFirst().lineSpacing = 24.3;
+    document.paragraphs.getFirst().alignment = Word.Alignment.justified;
+    document.paragraphs.getFirst().font.name = "Calibri";
+    document.paragraphs.getFirst().font.size = 10;
+  }
 }
 
-export async function runWord() {
+
+async function showLineNumber() {
+  const lineNumber = document.getElementById("line-number") as HTMLInputElement;
+
+  if (lineNumber.ariaSelected === "true")
+    activateLineNumber(true)
+  else
+    activateLineNumber(false)
+
+}
+function activateLineNumber(state: boolean) {
   return Word.run(async (context) => {
-    /**
-     * Insert your Word code here
-     */
-
-    // insert a paragraph at the end of the document.
-    const paragraph = context.document.body.insertParagraph("Hello World", Word.InsertLocation.end);
-
-    // change the paragraph color to blue.
-    paragraph.font.color = "blue";
-
-    await context.sync();
-  });
+    context.document.pageSetup.lineNumbering.isActive = state;
+  })
 }
