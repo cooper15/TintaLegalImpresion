@@ -58,18 +58,21 @@ export async function optionSelected() {
   }
 }
 
-
 async function showLineNumber() {
   const lineNumber = document.getElementById("line-number") as HTMLInputElement;
 
-  if (lineNumber.ariaSelected === "true")
-    activateLineNumber(true)
-  else
-    activateLineNumber(false)
-
+  lineNumber.addEventListener("change", (e) => {
+    if (lineNumber.checked) {
+      turnOnLineNumbering(true);
+    } else {
+      turnOnLineNumbering(false);
+    }
+  });
 }
-function activateLineNumber(state: boolean) {
+
+function turnOnLineNumbering(state: boolean) {
+  console.log("state" + state);
   return Word.run(async (context) => {
     context.document.pageSetup.lineNumbering.isActive = state;
-  })
+  });
 }
