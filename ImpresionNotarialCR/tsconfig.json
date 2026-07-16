@@ -9,7 +9,7 @@
     "outDir": "lib",
     "sourceMap": true,
     "types": ["office-js"],
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "es2015",
       "dom"
