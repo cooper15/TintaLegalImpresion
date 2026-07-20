@@ -34,7 +34,7 @@ async function showLineNumber() {
 async function printDocument() {
   const buttonPrint = document.getElementById("print") as HTMLButtonElement;
   buttonPrint.addEventListener("click", () => {
-    window.print();
+   
   });
 }
 
