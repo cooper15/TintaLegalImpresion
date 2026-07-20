@@ -12,7 +12,6 @@ Office.onReady((info) => {
     document.getElementById("app-body")!.style.display = "flex";
     optionSelected();
     showLineNumber();
-    printDocument();
   }
 });
 
@@ -28,13 +27,6 @@ async function showLineNumber() {
   const lineNumber = document.getElementById("line-number") as HTMLInputElement;
   lineNumber.addEventListener("change", (e) => {
     (lineNumber.checked) ? turnOnLineNumbering(true) : turnOnLineNumbering(false);
-  });
-}
-
-async function printDocument() {
-  const buttonPrint = document.getElementById("print") as HTMLButtonElement;
-  buttonPrint.addEventListener("click", () => {
-   
   });
 }
 
