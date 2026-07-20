@@ -9,65 +9,69 @@ import { MargingLayout, pageMarginsConfig } from "./pageconfig";
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
-    document.getElementById("sideload-msg").style.display = "none";
-    document.getElementById("app-body").style.display = "flex";
+    document.getElementById("app-body")!.style.display = "flex";
     optionSelected();
     showLineNumber();
+    printDocument();
   }
 });
 
 export async function optionSelected() {
   const pageSelect = document.getElementById("pagina") as HTMLSelectElement;
-
   pageSelect.addEventListener("change", () => {
     const selectedValue = pageSelect.value;
-    if (selectedValue === "Frente") {
-      return Word.run(async (context) => {
-        const document = context.document;
-        pageConfiguration(document, pageMarginsConfig.front);
-        generalParagraphConfiguration(document);
-        await context.sync();
-      });
-    } else if (selectedValue === "Vuelto") {
-      return Word.run(async (context) => {
-        const document = context.document;
-        pageConfiguration(document, pageMarginsConfig.back);
-        generalParagraphConfiguration(document);
-        await context.sync();
-      });
-    }
+    selectPageView(selectedValue);
   });
-
-  function pageConfiguration(document: Word.Document, page: MargingLayout) {
-    document.pageSetup.paperSize = Word.PaperSize.legal;
-    document.pageSetup.leftMargin = page.leftMargin;
-    document.pageSetup.rightMargin = page.rightMargin;
-    document.pageSetup.topMargin = page.topMargin;
-    document.pageSetup.bottomMargin = page.bottomMargin;
-    document.paragraphs.getFirst().leftIndent = page.leftIndent;
-    document.paragraphs.getFirst().rightIndent = page.rightIndent;
-  }
-
-  function generalParagraphConfiguration(document: Word.Document) {
-    document.paragraphs.getFirst().spaceBefore = 0;
-    document.paragraphs.getFirst().spaceAfter = 0;
-    document.paragraphs.getFirst().lineSpacing = 24.3;
-    document.paragraphs.getFirst().alignment = Word.Alignment.justified;
-    document.paragraphs.getFirst().font.name = "Calibri";
-    document.paragraphs.getFirst().font.size = 10;
-  }
 }
 
 async function showLineNumber() {
   const lineNumber = document.getElementById("line-number") as HTMLInputElement;
-
   lineNumber.addEventListener("change", (e) => {
-    if (lineNumber.checked) {
-      turnOnLineNumbering(true);
-    } else {
-      turnOnLineNumbering(false);
+    (lineNumber.checked) ? turnOnLineNumbering(true) : turnOnLineNumbering(false);
+  });
+}
+
+async function printDocument() {
+  const buttonPrint = document.getElementById("print") as HTMLButtonElement;
+  buttonPrint.addEventListener("click", () => {
+    window.print();
+  });
+}
+
+function selectPageView(selectedValue: string): any {
+  return Word.run(async (context) => {
+    document.getElementById("pagina-seleccione")?.remove();
+    if (selectedValue === "Frente") {
+      const document = context.document;
+      pageConfiguration(document, pageMarginsConfig.front);
+      generalParagraphConfiguration(document);
+      await context.sync();
+    } else if (selectedValue === "Vuelto") {
+      const document = context.document;
+      pageConfiguration(document, pageMarginsConfig.back);
+      generalParagraphConfiguration(document);
+      await context.sync();
     }
   });
+}
+
+function pageConfiguration(document: Word.Document, page: MargingLayout) {
+  document.pageSetup.paperSize = Word.PaperSize.legal;
+  document.pageSetup.leftMargin = page.leftMargin;
+  document.pageSetup.rightMargin = page.rightMargin;
+  document.pageSetup.topMargin = page.topMargin;
+  document.pageSetup.bottomMargin = page.bottomMargin;
+  document.paragraphs.getFirst().leftIndent = page.leftIndent;
+  document.paragraphs.getFirst().rightIndent = page.rightIndent;
+}
+
+function generalParagraphConfiguration(document: Word.Document) {
+  document.paragraphs.getFirst().spaceBefore = 0;
+  document.paragraphs.getFirst().spaceAfter = 0;
+  document.paragraphs.getFirst().lineSpacing = 24.3;
+  document.paragraphs.getFirst().alignment = Word.Alignment.justified;
+  document.paragraphs.getFirst().font.name = "Calibri";
+  document.paragraphs.getFirst().font.size = 10;
 }
 
 function turnOnLineNumbering(state: boolean) {
@@ -76,3 +80,4 @@ function turnOnLineNumbering(state: boolean) {
     context.document.pageSetup.lineNumbering.isActive = state;
   });
 }
+
