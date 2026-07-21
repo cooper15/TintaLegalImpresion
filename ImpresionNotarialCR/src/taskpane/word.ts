@@ -37,13 +37,12 @@ function selectPageView(selectedValue: string): any {
       const document = context.document;
       pageConfiguration(document, pageMarginsConfig.front);
       generalParagraphConfiguration(document);
-      await context.sync();
     } else if (selectedValue === "Vuelto") {
       const document = context.document;
       pageConfiguration(document, pageMarginsConfig.back);
-      generalParagraphConfiguration(document);
-      await context.sync();
+      generalParagraphConfiguration(document); 
     }
+     await context.sync();
   });
 }
 
@@ -53,6 +52,7 @@ function pageConfiguration(document: Word.Document, page: MargingLayout) {
   document.pageSetup.rightMargin = page.rightMargin;
   document.pageSetup.topMargin = page.topMargin;
   document.pageSetup.bottomMargin = page.bottomMargin;
+  document.pageSetup.mirrorMargins = true;
   document.paragraphs.getFirst().leftIndent = page.leftIndent;
   document.paragraphs.getFirst().rightIndent = page.rightIndent;
 }
@@ -60,7 +60,7 @@ function pageConfiguration(document: Word.Document, page: MargingLayout) {
 function generalParagraphConfiguration(document: Word.Document) {
   document.paragraphs.getFirst().spaceBefore = 0;
   document.paragraphs.getFirst().spaceAfter = 0;
-  document.paragraphs.getFirst().lineSpacing = 24.5;
+  document.paragraphs.getFirst().lineSpacing = 24.2;
   document.paragraphs.getFirst().alignment = Word.Alignment.justified;
   document.paragraphs.getFirst().font.name = "Calibri";
   document.paragraphs.getFirst().font.size = 10;
@@ -70,6 +70,7 @@ function turnOnLineNumbering(state: boolean) {
   console.log("state" + state);
   return Word.run(async (context) => {
     context.document.pageSetup.lineNumbering.isActive = state;
+    await context.sync();
   });
 }
 
