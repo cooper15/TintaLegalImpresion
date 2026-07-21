@@ -9,19 +9,19 @@ export interface MargingLayout {
 
 export const pageMarginsConfig: Record<string, MargingLayout> = {
     front: {
-        leftIndent: 4.32,
-        rightIndent: -4.32,
+        leftIndent: 0,
+        rightIndent: 0,
         topMargin: 127.44,
-        bottomMargin: 139.84,
+        bottomMargin: 137.00,
         leftMargin: 87.84,
         rightMargin: 59.76,
     },
 
     back: {
-        leftIndent: 5.04,
-        rightIndent: -5.04,
+        leftIndent: 0,
+        rightIndent: 0,
         topMargin: 127.44,
-        bottomMargin: 139.84,
+        bottomMargin: 137.00,
         leftMargin: 59.43,
         rightMargin: 87.84
     }

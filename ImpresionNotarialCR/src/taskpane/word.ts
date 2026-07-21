@@ -60,7 +60,7 @@ function pageConfiguration(document: Word.Document, page: MargingLayout) {
 function generalParagraphConfiguration(document: Word.Document) {
   document.paragraphs.getFirst().spaceBefore = 0;
   document.paragraphs.getFirst().spaceAfter = 0;
-  document.paragraphs.getFirst().lineSpacing = 24.2;
+  document.paragraphs.getFirst().lineSpacing = 24.6;
   document.paragraphs.getFirst().alignment = Word.Alignment.justified;
   document.paragraphs.getFirst().font.name = "Calibri";
   document.paragraphs.getFirst().font.size = 10;
