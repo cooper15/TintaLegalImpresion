@@ -11,7 +11,7 @@ export const pageMarginsConfig: Record<string, MargingLayout> = {
     front: {
         leftIndent: 4.32,
         rightIndent: -4.32,
-        topMargin: 127.44,
+        topMargin: 130.00,
         bottomMargin: 141.84,
         leftMargin: 87.84,
         rightMargin: 59.76,
@@ -20,7 +20,7 @@ export const pageMarginsConfig: Record<string, MargingLayout> = {
     back: {
         leftIndent: 5.04,
         rightIndent: -5.04,
-        topMargin: 127.44,
+        topMargin: 130.00,
         bottomMargin: 141.84,
         leftMargin: 59.76,
         rightMargin: 87.84

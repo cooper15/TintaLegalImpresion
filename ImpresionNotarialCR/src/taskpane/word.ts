@@ -12,6 +12,7 @@ Office.onReady((info) => {
     document.getElementById("app-body")!.style.display = "flex";
     optionSelected();
     showLineNumber();
+    openPrintPreview();
   }
 });
 
@@ -25,8 +26,21 @@ export async function optionSelected() {
 
 async function showLineNumber() {
   const lineNumber = document.getElementById("line-number") as HTMLInputElement;
-  lineNumber.addEventListener("change", (e) => {
+  lineNumber.addEventListener("change", () => {
     (lineNumber.checked) ? turnOnLineNumbering(true) : turnOnLineNumbering(false);
+  });
+}
+
+async function openPrintPreview() {
+  const printButton = document.getElementById("print");
+  const lineNumber = document.getElementById("line-number") as HTMLInputElement;
+  printButton?.addEventListener("click", () => {
+    turnOnLineNumbering(false)
+    lineNumber.checked = false;
+    Word.run(async (context) =>{
+      context.document.printPreview();
+      await context.sync();
+    });
   });
 }
 
@@ -40,9 +54,9 @@ function selectPageView(selectedValue: string): any {
     } else if (selectedValue === "Vuelto") {
       const document = context.document;
       pageConfiguration(document, pageMarginsConfig.back);
-      generalParagraphConfiguration(document); 
+      generalParagraphConfiguration(document);
     }
-     await context.sync();
+    await context.sync();
   });
 }
 
