@@ -1,182 +1,337 @@
 /* 
- * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
- * See LICENSE in the project root for license information.
+ * Cozy Pastel Rose Theme for Office Add-in
  */
 
- html,
- body {
-     width: 100%;
-     height: 100%;
-     margin: 0;
-     padding: 0;
- }
- 
- ul {
-     margin: 0;
-     padding: 0;
- }
- 
- .ms-welcome__header {
-    padding: 20px;
-    padding-bottom: 30px;
-    padding-top: 100px;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    align-items: center;
- }
+:root {
+  /* Soft Pastel Rose & Cozy Contrast Palette */
+  --bg-main: #fcf9f7;         /* Warm warm-toned soft linen cream with a hint of rose */
+  --bg-card: #ffffff;         /* Pure clean white for inputs */
+  --text-primary: #4a3e3d;    /* Cozy dark cocoa-charcoal (softer than pure black) */
+  --text-muted: #827574;      /* Muted rose slate for helper strings */
+  --accent-pastel: #f3dad8;   /* Soft, soothing pastel rose petal pink */
+  --accent-cozy: #c59794;     /* Deeper warm dusty rose for focus states and text contrast */
+  --accent-hover: #e8c6c3;    /* Active hover highlight blush */
 
- .ms-welcome__main {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-flex: 1 0 0;
-    flex: 1 0 0;
-    padding: 10px 20px;
- }
- 
- .ms-welcome__main > h2 {
-     width: 100%;
-     text-align: center;
- }
- 
- .ms-welcome__features {
-     list-style-type: none;
-     margin-top: 20px;
- }
- 
- .ms-welcome__features.ms-List .ms-ListItem {
-     padding-bottom: 20px;
-     display: -webkit-flex;
-     display: flex;
- }
- 
- .ms-welcome__features.ms-List .ms-ListItem > .ms-Icon {
-     margin-right: 10px;
- }
- 
- .ms-welcome__action.ms-Button--hero {
-     margin-top: 30px;
- }
- 
-.ms-Button.ms-Button--hero .ms-Button-label {
-  color: #0078d7;
+  /* Global Fonts & Radii */
+  --font-stack: "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --radius-cozy: 12px;
+  --radius-input: 8px;
+  --radius-toggle: 20px;
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ms-Button.ms-Button--hero:hover .ms-Button-label,
-.ms-Button.ms-Button--hero:focus .ms-Button-label{
-  color: #005a9e;
-  cursor: pointer;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  font-family: var(--font-stack);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 b {
-    font-weight: bold;
+  font-weight: 600;
+  color: var(--accent-cozy);
 }
 
-/* Container sizing and core Fluent font */
-.select-group, .checkbox-group {
+/* --- Container & Task Pane Structures --- */
+
+.ms-welcome__header {
+  padding: 32px 24px;
+  background: linear-gradient(180deg, rgba(243, 218, 216, 0.4) 0%, rgba(252, 249, 247, 0) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ms-welcome__main {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px 24px 24px;
+}
+
+.ms-welcome__main>h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.ms-welcome__features {
+  margin-top: 16px;
+  background-color: var(--bg-card);
+  padding: 16px;
+  border-radius: var(--radius-cozy);
+  box-shadow: 0 4px 12px rgba(74, 62, 61, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.ms-welcome__features .ms-ListItem {
+  padding-bottom: 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 24px; /* Ribbon-precise layout height */
-  margin-bottom: 6px; /* Spacing between input lines */
-  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
-/* Add the 24px blank space requested earlier between your two custom groups */
+.ms-welcome__features .ms-ListItem:last-child {
+  padding-bottom: 0;
+}
+
+.ms-welcome__features .ms-ListItem>.ms-Icon {
+  margin-right: 12px;
+  color: var(--accent-cozy);
+  font-size: 16px;
+}
+
+/* --- Cozy Hero Call-to-Action Button --- */
+
+/* --- Cozy Material 3 Floating Hero Button --- */
+
+.ms-Button.ms-Button--hero {
+  margin-top: 24px;
+  background-color: var(--accent-pastel);
+  border: none;
+
+  /* Material 3 Capsule/Pill shape (fully rounded corners instead of sharp boxes) */
+  padding: 14px 28px;
+  border-radius: 24px;
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
+  /* Material Elevation 1: Soft tactile, realistic ambient shadow using warm tone tokens */
+  box-shadow: 0 3px 1px -2px rgba(74, 62, 61, 0.2),
+    0 2px 2px 0 rgba(74, 62, 61, 0.14),
+    0 1px 5px 0 rgba(74, 62, 61, 0.12);
+
+  /* Easing curve synced with Android/Material motion specs */
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+    background-color 0.2s linear;
+}
+
+.ms-Button.ms-Button--hero .ms-Button-label {
+  color: #4a2725;
+  /* Deepest cozy espresso-rose for clear AA contrast readability */
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  /* Subtle Material tracking */
+}
+
+/* --- Direct Material Style for your Print Button --- */
+
+#print {
+  /* Style Resets */
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+
+  /* Cozy Pastel Color Palette */
+  background-color: var(--accent-pastel, #f3dad8);
+  color: #4a2725;
+  /* Deepest cozy espresso-rose for excellent contrast and legibility */
+
+  /* Typography & Sizing */
+  font-family: var(--font-stack, "Segoe UI", -apple-system, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+
+  /* Material 3 Capsule/Pill Layout */
+  padding: 12px 28px;
+  border-radius: 24px;
+  /* Fully rounded capsule edges */
+  cursor: pointer;
+
+  /* Alignment Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+
+  /* Material Elevation 1: Soft, realistic ambient depth shadow */
+  box-shadow: 0 3px 1px -2px rgba(74, 62, 61, 0.2),
+    0 2px 2px 0 rgba(74, 62, 61, 0.14),
+    0 1px 5px 0 rgba(74, 62, 61, 0.12);
+
+  /* Android/Material Motion Easing Curves */
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+    background-color 0.2s linear;
+}
+
+/* Material Hover State: Smooth organic lift + Deeper Elevation 2 Shadow */
+#print:hover {
+  background-color: var(--accent-hover, #e8c6c3);
+  transform: translateY(-2px);
+  /* Slight upward hover float */
+
+  box-shadow: 0 2px 4px -1px rgba(74, 62, 61, 0.2),
+    0 4px 5px 0 rgba(74, 62, 61, 0.14),
+    0 1px 10px 0 rgba(74, 62, 61, 0.12);
+}
+
+/* Material Pressed State: Sinks into the page with a tactile micro-scale drop */
+#print:active {
+  background-color: #dbaea9;
+  /* Deeper dusty rose ink fill */
+  transform: translateY(0) scale(0.96);
+  /* Physically shrinks slightly on click */
+
+  box-shadow: 0 5px 5px -3px rgba(74, 62, 61, 0.2),
+    0 8px 10px 1px rgba(74, 62, 61, 0.14),
+    0 3px 14px 2px rgba(74, 62, 61, 0.12);
+}
+
+/* Accessible focus ring tailored seamlessly around the rounded capsule shape */
+#print:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--bg-main, #fcf9f7), 0 0 0 5px var(--accent-cozy, #c59794);
+}
+
+/* --- Universal Alignments & Typography --- */
+
+.select-group,
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Spreads label left, control right nicely */
+  gap: 12px;
+  height: 24px;
+  margin-bottom: 8px;
+}
+
+/* Maintained requested 24px separation space */
 .select-group {
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
 }
 
-/* Ribbon Typography Styles */
-.select-group label, .checkbox-group label {
-  font-size: 12px;
-  color: #323130;
-  cursor: default;
+.select-group label,
+.checkbox-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
   user-select: none;
 }
 
-/* Custom Dropdown Wrapper for Arrow Injection */
+/* --- Cozy Minimalist Dropdown --- */
+
 .select-group {
   position: relative;
-  width: max-content;
+  width: 100%;
+  /* Spans naturally inside its flex wrapper */
+  max-width: 280px;
 }
 
-/* Sharp Ribbon Select Menu */
 .select-group select {
   appearance: none;
   -webkit-appearance: none;
-  background-color: #ffffff;
-  border: 1px solid #8a8886;
-  border-radius: 2px;
-  padding: 2px 24px 2px 6px;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-input);
+  padding: 2px 28px 2px 10px;
   font-size: 12px;
-  color: #323130;
-  height: 22px;
-  min-width: 140px;
+  color: var(--text-primary);
+  height: 24px;
+  min-width: 130px;
   cursor: pointer;
   outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: var(--transition-smooth);
 }
 
-/* Hover and Focus interaction states */
 .select-group select:hover {
-  background-color: #f3f2f1;
-  border-color: #323130;
-}
-.select-group select:focus {
-  border: 2px solid #0f6cbd; /* Fluent UI brand blue active color */
-  padding: 1px 23px 1px 5px; /* Offset calculation for 2px layout shift */
+  background-color: #faf6f5;
+  border-color: var(--accent-cozy);
 }
 
-/* Office Arrow Indicator */
+.select-group select:focus {
+  border: 1.5px solid var(--accent-cozy);
+  box-shadow: 0 0 0 3px rgba(197, 151, 148, 0.18);
+}
+
+/* Elegant, minimal chevron dropdown arrow override */
 .select-group::after {
-  content: "⌂";
-  transform: rotate(180deg);
-  font-size: 10px;
+  content: "▾";
+  font-size: 11px;
   position: absolute;
-  right: 8px;
-  top: 5px;
-  color: #605e5c;
+  right: 10px;
+  top: 3px;
+  color: var(--text-muted);
   pointer-events: none;
 }
 
-/* Sharp Office Checkbox Styles */
+/* --- Beautiful Pastel Slide Toggle Switch --- */
+
 .checkbox-group input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  border: 1px solid #8a8886;
-  border-radius: 2px;
-  background-color: #ffffff;
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background-color: #e5dedc;
+  /* Warm gray-taupe track when off */
+  border-radius: var(--radius-toggle);
   cursor: pointer;
   outline: none;
-  position: relative;
-  order: -1; /* Ensures the checkbox physically stays on the left of text */
-}
-.checkbox-group input[type="checkbox"]:hover {
-  border-color: #323130;
-}
-.checkbox-group input[type="checkbox"]:checked {
-  background-color: #0f6cbd;
-  border-color: #0f6cbd;
+  transition: var(--transition-smooth);
+  border: none;
+  order: 1;
+  /* Pushes the switch to the right edge smoothly */
 }
 
-/* Checkmark construction inside the custom container */
-.checkbox-group input[type="checkbox"]:checked::after {
+/* The actual physical sliding circle handle */
+.checkbox-group input[type="checkbox"]::before {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 1px;
-  width: 3px;
-  height: 7px;
-  border: solid #ffffff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: var(--transition-smooth);
+}
+
+/* Active Hover track styling */
+.checkbox-group input[type="checkbox"]:hover {
+  background-color: #dad2cf;
+}
+
+/* Slide animation and pastel track fill when Checked */
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--accent-cozy);
+}
+
+.checkbox-group input[type="checkbox"]:checked::before {
+  transform: translateX(16px);
+  background-color: #ffffff;
+}
+
+/* Focus indicator ring tailored for the slide switch shape */
+.checkbox-group input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 3px rgba(197, 151, 148, 0.18);
 }
