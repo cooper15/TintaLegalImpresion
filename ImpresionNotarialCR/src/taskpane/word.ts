@@ -77,7 +77,7 @@ function generalParagraphConfiguration(document: Word.Document) {
   document.paragraphs.getFirst().lineSpacing = 23.8;
   document.paragraphs.getFirst().alignment = Word.Alignment.justified;
   document.paragraphs.getFirst().font.name = "Calibri";
-  document.paragraphs.getFirst().font.size = 12;
+  document.paragraphs.getFirst().font.size = 10;
 }
 
 function turnOnLineNumbering(state: boolean) {
